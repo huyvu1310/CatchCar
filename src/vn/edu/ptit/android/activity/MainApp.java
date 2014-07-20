@@ -27,6 +27,7 @@ public class MainApp extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_app);
+		dfd
 
 		gridView = (GridView) findViewById(R.id.gridview1);
 
