@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <application
@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="vn.edu.ptit.android.activity.MainActivity2"
+            android:name="vn.edu.ptit.android.activity.MainApp"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="vn.edu.ptit.android.activity.MainApp"
+            android:name="vn.edu.ptit.android.activity.MainActivity2"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAINAPP" />
+                <action android:name="android.intent.action.MainActivity2" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

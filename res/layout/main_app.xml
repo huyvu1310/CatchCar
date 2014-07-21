@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnCount="2"
+    android:orientation="horizontal"
+    android:rowCount="3"
+    tools:context=".GridXMLActivity" >
 
-    <GridView
-        android:id="@+id/gridview1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:columnWidth="50dp"
-        android:gravity="center"
-        android:numColumns="2"
-        android:stretchMode="columnWidth" >
-    </GridView>
+    <!-- <Button
+        android:id="@+id/button1"
+        android:layout_gravity="left|top"
+        android:text="Button" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/button2"
+        android:layout_gravity="left|top"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_gravity="left|top"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_gravity="left|top"
+        android:text="Button" /> -->
+
+</GridLayout>
