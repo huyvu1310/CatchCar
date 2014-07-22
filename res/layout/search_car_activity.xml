@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/green" />
+
+            <TextView
+                android:id="@+id/tvFromPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fromPlace"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5" >
+
+            <TextView
+                android:id="@+id/tvFromCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/city"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etFromCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Hà Nội"
+                android:inputType="textFilter"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5" >
+
+            <TextView
+                android:id="@+id/tvFromDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/district"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etFromDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Thanh Xuân"
+                android:inputType="textFilter"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/red" />
+
+            <TextView
+                android:id="@+id/tvToPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toPlace"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5" >
+
+            <TextView
+                android:id="@+id/tvToCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/city"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etToCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Hà Nội"
+                android:inputType="textFilter"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5" >
+
+            <TextView
+                android:id="@+id/tvToDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/district"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etToDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Thanh Xuân"
+                android:inputType="textFilter"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search" />
+
+        <ListView
+            android:id="@+id/lvResult"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,9 @@
 <resources>
 
     <string name="app_name">CatchCar</string>
-
+    <string name="city">Tỉnh/TP</string>
+    <string name="fromPlace">Điểm đi</string>
+    <string name="toPlace">Điểm đến</string>
+    <string name="district">Quận/Huyện</string>
+<string name="search">Tìm chuyến xe</string>
 </resources>
