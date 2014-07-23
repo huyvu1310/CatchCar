@@ -1,10 +1,12 @@
 package vn.edu.ptit.android.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.GridLayout.Spec;
 import android.widget.RelativeLayout;
@@ -108,5 +110,16 @@ public class MainApp extends Activity {
 		RelativeLayout relativeLayout = new RelativeLayout(this);
 		relativeLayout.addView(gridLayout);
 		setContentView(relativeLayout);
+		
+		//set event for view
+		twoByTwo1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 }
