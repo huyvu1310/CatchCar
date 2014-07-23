@@ -48,6 +48,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private EditText etNumOfSeat;
 	private EditText etDate;
 	private EditText etTime;
+	private EditText etCarType;
 	private Button btPublish, btCancel;
 	private ImageButton btDate, btTime, btAddTown;
 	static final int DATE_DIALOG_ID = 0;
@@ -87,6 +88,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		etNumOfSeat = (EditText) findViewById(R.id.etNumOfSeat);
 		etDate = (EditText) findViewById(R.id.etDate);
 		etTime = (EditText) findViewById(R.id.etTime);
+		etCarType = (EditText) findViewById(R.id.etCarType);
 		btPublish = (Button) findViewById(R.id.btPublish);
 		btPublish.setOnClickListener(this);
 		btCancel = (Button) findViewById(R.id.btCancel);
@@ -172,9 +174,9 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			try {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
-				Trips trip = new Trips(1, 3, "", etDate.getText().toString()
+				Trips trip = new Trips(1, 3, etCarType.getText().toString(), etDate.getText().toString()
 						+ "-" + etTime.getText().toString(), soghe, soghe,
-						tvTrip.getText().toString(), "");
+						tvTrip.getText().toString(), "khong co chi");
 				JSONObject obj = trip.toJSON();
 
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
