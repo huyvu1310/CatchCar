@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import vn.edu.ptit.android.entity.Trips;
-import vn.edu.ptit.android.entity.TripsAdapter;
+import vn.edu.ptit.android.utils.TripsAdapter;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
