@@ -1,8 +1,24 @@
 package vn.edu.ptit.android.activity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import vn.edu.ptit.android.entity.Trips;
+import vn.edu.ptit.android.entity.TripsAdapter;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -10,6 +26,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +40,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class OfferTripActivity extends Activity implements OnClickListener {
+
+	private static String url = "http://192.168.38.1:8080/CatchCar/ChuyenxeServlet";
 	private AutoCompleteTextView actvCity;
 	private AutoCompleteTextView actvDistrict;
 	private TextView tvTrip;
@@ -98,7 +117,8 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btAddTown:
-			if (!actvCity.equals("") && !actvDistrict.equals("")) {
+			if (!actvCity.getText().toString().equals("")
+					&& !actvDistrict.getText().toString().equals("")) {
 				tvTrip.setText(tvTrip.getText().toString()
 						+ actvDistrict.getText().toString() + "-"
 						+ actvCity.getText().toString() + ",");
@@ -116,10 +136,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "????", 4).show();
 			break;
 		case R.id.btPublish:
-			int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
-			Trips trip = new Trips(1, 3, "", etDate.getText().toString() + "-"
-					+ etTime.getText().toString(), soghe, soghe, tvTrip
-					.getText().toString(), "");
+
 			break;
 		default:
 			break;
@@ -136,4 +153,61 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		}
 		return null;
 	}
+
+	private class AddMethod extends AsyncTask<String, Void, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			String out = null;
+			for (String param : params) {
+				out = getOutput(param);
+			}
+			return out;
+		}
+
+		private String getOutput(String param) {
+			// TODO Auto-generated method stub
+			String out = null;
+			try {
+				DefaultHttpClient httpClient = new DefaultHttpClient();
+				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
+				Trips trip = new Trips(1, 3, "", etDate.getText().toString()
+						+ "-" + etTime.getText().toString(), soghe, soghe,
+						tvTrip.getText().toString(), "");
+				JSONObject obj = trip.toJSON();
+
+				List<NameValuePair> list = new ArrayList<NameValuePair>();
+				list.add(new BasicNameValuePair("add", obj.toString()));
+				UrlEncodedFormEntity e = new UrlEncodedFormEntity(list,
+						HTTP.UTF_8);
+				HttpPost httpPost = new HttpPost(param);
+				httpPost.setEntity(e);
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+
+				HttpEntity httpEntity = httpResponse.getEntity();
+				String res = EntityUtils.toString(httpEntity);
+				out = res;
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			return out;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			if (result.equals("OK")){
+				Toast.makeText(getApplicationContext(), "do hoi",3).show();
+			}
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+		}
+	}
+
 }
