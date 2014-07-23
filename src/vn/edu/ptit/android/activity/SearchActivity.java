@@ -39,8 +39,8 @@ public class SearchActivity extends Activity {
 	ListView lvResult;
 	TripsAdapter tripsAdapter;
 
-	private static final String[] COUNTRIES = new String[] { "Hà Nội",
-			"Nam Định", "Vĩnh Phúc", "Thái Bình", "Quảng Ninh" };
+	private static final String[] COUNTRIES = new String[] { "HĂ  Ná»™i",
+			"Nam Ä�á»‹nh", "VÄ©nh PhĂºc", "ThĂ¡i BĂ¬nh", "Quáº£ng Ninh" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class SearchActivity extends Activity {
 				String toDistrict = tvToDistrict.getText().toString();
 				String search = fromDistrict + "-" + fromPlace + ","
 						+ toDistrict + "-" + toPlace;
-
+				System.out.println(search);
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
 				list.add(new BasicNameValuePair("chuyenxe", search));
 				UrlEncodedFormEntity e = new UrlEncodedFormEntity(list,

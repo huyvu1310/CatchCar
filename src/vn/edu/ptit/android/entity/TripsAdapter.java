@@ -27,15 +27,12 @@ public class TripsAdapter extends ArrayAdapter<Trips> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = context.getLayoutInflater().inflate(layoutId, null);
 
-		TextView tvAuthor = (TextView) convertView
-				.findViewById(R.id.tvAuthor);
-		TextView tvDate = (TextView) convertView
-				.findViewById(R.id.tvDate);
-		TextView tvTime = (TextView) convertView
-				.findViewById(R.id.tvTime);
+		TextView tvAuthor = (TextView) convertView.findViewById(R.id.tvAuthor);
+		TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+		TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 
 		Trips trips = arrContact.get(position);
-		tvAuthor.setText(trips.getTaiXeid());
+		tvAuthor.setText(String.valueOf(trips.getTaiXeid()));
 		tvDate.setText(trips.getThoiGian());
 		tvTime.setText(trips.getThoiGian());
 
