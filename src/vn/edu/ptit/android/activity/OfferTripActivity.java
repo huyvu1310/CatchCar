@@ -2,6 +2,7 @@ package vn.edu.ptit.android.activity;
 
 import java.util.Calendar;
 
+import vn.edu.ptit.android.entity.Trips;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -99,8 +100,8 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		case R.id.btAddTown:
 			if (!actvCity.equals("") && !actvDistrict.equals("")) {
 				tvTrip.setText(tvTrip.getText().toString()
-						+ actvCity.getText().toString() + "-"
-						+ actvDistrict.getText().toString() + '\n');
+						+ actvDistrict.getText().toString() + "-"
+						+ actvCity.getText().toString() + ",");
 				actvCity.setText("");
 				actvDistrict.setText("");
 			}
@@ -115,6 +116,11 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "????", 4).show();
 			break;
 		case R.id.btPublish:
+			int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
+			Trips trip = new Trips(1, 3, "", etDate.getText().toString() + "-"
+					+ etTime.getText().toString(), soghe, soghe, tvTrip
+					.getText().toString(), "");
+			break;
 		default:
 			break;
 		}
