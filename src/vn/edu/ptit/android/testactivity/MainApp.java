@@ -26,6 +26,6 @@ public class MainApp extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search_car_activity);
+		setContentView(R.layout.offer_trip_activity);
 	}
 }
