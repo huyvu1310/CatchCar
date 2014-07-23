@@ -22,27 +22,26 @@
             android:background="@android:color/transparent"
             android:src="@drawable/infor" />
 
-        <ScrollView
-            android:id="@+id/svChat"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="12" >
+        <ListView
+            android:id="@+id/lvChat"
+            android:layout_width="match_parent"
+            android:layout_height="316dp"
+            android:layout_weight="10.88" >
 
-            <ListView
-                android:id="@+id/lvChat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </ListView>
-        </ScrollView>
+        </ListView>
 
         <EditText
-            android:id="@+id/edChat"
+            android:id="@+id/etChat"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="3"
             android:background="@android:color/darker_gray"
-            android:hint="input text" />
+            android:ems="10"
+            android:hint="input text" >
+
+            <requestFocus />
+        </EditText>
+
     </LinearLayout>
 
 </LinearLayout>
