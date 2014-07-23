@@ -2,6 +2,7 @@ package vn.edu.ptit.android.entity;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Trips implements Serializable {
@@ -105,6 +106,17 @@ public class Trips implements Serializable {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public JSONObject toJSON() throws JSONException {
+		JSONObject e = new JSONObject();
+		e.put("idnguoidung", this.taiXeid);
+		e.put("loaixe", this.loaiXe);
+		e.put("thoigian", this.thoiGian);
+		e.put("soghe", this.soGhe);
+		e.put("soghecon", this.soGheCon);
+		e.put("lotrinh", this.loTrinh);
+		return e;
 	}
 
 }
