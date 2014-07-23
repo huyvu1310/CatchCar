@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="15" >
+
+        <ImageButton
+            android:id="@+id/btChatInfor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:src="@drawable/infor" />
+
+        <ScrollView
+            android:id="@+id/svChat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="12" >
+
+            <ListView
+                android:id="@+id/lvChat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </ListView>
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/edChat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="3"
+            android:background="@android:color/darker_gray"
+            android:hint="input text" />
+    </LinearLayout>
+
+</LinearLayout>
