@@ -11,21 +11,21 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView0"
+            android:id="@+id/tvMoTa"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Mô tả  lộ trình" />
 
-        <EditText
-            android:id="@+id/editText3"
+        <TextView
+            android:id="@+id/tvMoTa"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:ems="10"
             android:inputType="textMultiLine" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageViewGmap"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_gravity="right"
@@ -44,13 +44,13 @@
                 android:layout_weight="6"
                 android:text="Số ghế" />
 
-            <EditText
-                android:id="@+id/et2"
+            <TextView
+                android:id="@+id/tvSoGhe"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:ems="10"
                 android:hint="" >
-            </EditText>
+            </TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -65,13 +65,13 @@
                 android:layout_weight="5"
                 android:text="Ngày khởi hành" />
 
-            <EditText
-                android:id="@+id/et3"
+            <TextView
+                android:id="@+id/tvNgay"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="" >
-            </EditText>
+            </TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -86,13 +86,13 @@
                 android:layout_weight="5"
                 android:text="Giờ xuất phát" />
 
-            <EditText
-                android:id="@+id/et4"
+            <TextView
+                android:id="@+id/tvGio"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="" >
-            </EditText>
+            </TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -103,25 +103,18 @@
             android:weightSum="14" >
 
             <Button
-                android:id="@+id/bt3"
+                android:id="@+id/btLienLac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:text="Liên lạc" />
 
             <Button
-                android:id="@+id/bt4"
+                android:id="@+id/btGuiYeuCau"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:text="Gửi yêu cầu" />
-            
-            <Button
-                android:id="@+id/bt5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Quay lại" />
             
         </LinearLayout>
     </LinearLayout>
