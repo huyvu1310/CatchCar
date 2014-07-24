@@ -27,6 +27,7 @@ public class ChiTietActivity extends Activity {
 		tvNgay = (TextView) findViewById(R.id.tvNgay);
 		tvGio = (TextView) findViewById(R.id.tvGio);
 		
+		
 		btLienLac = (Button) findViewById(R.id.btLienLac);
 		btGui = (Button) findViewById(R.id.btGuiYeuCau);
 		
