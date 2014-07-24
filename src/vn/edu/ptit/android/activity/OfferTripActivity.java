@@ -13,12 +13,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import vn.edu.ptit.android.entity.Trips;
-import vn.edu.ptit.android.entity.TripsAdapter;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -40,8 +37,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class OfferTripActivity extends Activity implements OnClickListener {
-
 	private static String url = "http://192.168.38.1:8080/CatchCar/ChuyenxeServlet";
+
 	private AutoCompleteTextView actvCity;
 	private AutoCompleteTextView actvDistrict;
 	private TextView tvTrip;
@@ -117,11 +114,10 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btAddTown:
-			if (!actvCity.getText().toString().equals("")
-					&& !actvDistrict.getText().toString().equals("")) {
+			if (!actvCity.equals("") && !actvDistrict.equals("")) {
 				tvTrip.setText(tvTrip.getText().toString()
-						+ actvDistrict.getText().toString() + "-"
-						+ actvCity.getText().toString() + ",");
+						+ actvCity.getText().toString() + "-"
+						+ actvDistrict.getText().toString() + ',');
 				actvCity.setText("");
 				actvDistrict.setText("");
 			}
@@ -136,7 +132,8 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "????", 4).show();
 			break;
 		case R.id.btPublish:
-
+			AddMethod addMethod = new AddMethod();
+			addMethod.execute(new String[] { url });
 			break;
 		default:
 			break;
@@ -172,11 +169,10 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			try {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
-				Trips trip = new Trips(1, 3, "", etDate.getText().toString()
+				Trips trip = new Trips(1, 3, "sdasd", etDate.getText().toString()
 						+ "-" + etTime.getText().toString(), soghe, soghe,
-						tvTrip.getText().toString(), "");
+						tvTrip.getText().toString(), "dasd");
 				JSONObject obj = trip.toJSON();
-
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
 				list.add(new BasicNameValuePair("add", obj.toString()));
 				UrlEncodedFormEntity e = new UrlEncodedFormEntity(list,
@@ -198,8 +194,8 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
-			if (result.equals("OK")){
-				Toast.makeText(getApplicationContext(), "do hoi",3).show();
+			if (result.equals("OK")) {
+				Toast.makeText(getApplicationContext(), "do hoi", 3).show();
 			}
 		}
 
