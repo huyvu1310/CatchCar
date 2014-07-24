@@ -110,14 +110,26 @@ public class MainApp extends Activity {
 		RelativeLayout relativeLayout = new RelativeLayout(this);
 		relativeLayout.addView(gridLayout);
 		setContentView(relativeLayout);
-		
-		//set event for view
+
+		// set event for view
 		twoByTwo1.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+				Intent intent = new Intent(getApplicationContext(),
+						SearchActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		twoByTwo2.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getApplicationContext(),
+						LoginActivity.class);
 				startActivity(intent);
 			}
 		});

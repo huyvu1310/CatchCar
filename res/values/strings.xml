@@ -5,6 +5,9 @@
     <string name="fromPlace">Điểm đi</string>
     <string name="toPlace">Điểm đến</string>
     <string name="district">Quận/Huyện</string>
-<string name="search">Tìm chuyến xe</string>
-<string name="so_luong_ket_qua">Số lượng kết quả</string>
+    <string name="search">Tìm chuyến xe</string>
+    <string name="so_luong_ket_qua">Số lượng kết quả</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+
 </resources>
