@@ -46,7 +46,7 @@ public class ResultSearchActivity extends Activity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				//thay doi MainApp.class cho phu hop
-				Intent intent = new Intent(ResultSearchActivity.this, MainApp.class);
+				Intent intent = new Intent(ResultSearchActivity.this, ChiTietActivity.class);
 				intent.putParcelableArrayListExtra("listResultTrips", arrTrips);
 				intent.putExtra("position", position);
 				startActivity(intent);
