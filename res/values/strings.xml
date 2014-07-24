@@ -6,4 +6,5 @@
     <string name="toPlace">Điểm đến</string>
     <string name="district">Quận/Huyện</string>
 <string name="search">Tìm chuyến xe</string>
+<string name="so_luong_ket_qua">Số lượng kết quả</string>
 </resources>

@@ -14,8 +14,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-
 import vn.edu.ptit.android.entity.Trips;
+import vn.edu.ptit.android.utils.TripsAdapter;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -45,6 +45,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private EditText etNumOfSeat;
 	private EditText etDate;
 	private EditText etTime;
+	private EditText etCarType;
 	private Button btPublish, btCancel;
 	private ImageButton btDate, btTime, btAddTown;
 	static final int DATE_DIALOG_ID = 0;
@@ -84,6 +85,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		etNumOfSeat = (EditText) findViewById(R.id.etNumOfSeat);
 		etDate = (EditText) findViewById(R.id.etDate);
 		etTime = (EditText) findViewById(R.id.etTime);
+		etCarType = (EditText) findViewById(R.id.etCarType);
 		btPublish = (Button) findViewById(R.id.btPublish);
 		btPublish.setOnClickListener(this);
 		btCancel = (Button) findViewById(R.id.btCancel);
@@ -169,7 +171,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			try {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
-				Trips trip = new Trips(1, 3, "sdasd", etDate.getText().toString()
+				Trips trip = new Trips(1, 3, etCarType.getText().toString(), etDate.getText().toString()
 						+ "-" + etTime.getText().toString(), soghe, soghe,
 						tvTrip.getText().toString(), "dasd");
 				JSONObject obj = trip.toJSON();

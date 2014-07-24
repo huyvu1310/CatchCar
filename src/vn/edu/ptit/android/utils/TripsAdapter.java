@@ -1,8 +1,10 @@
-package vn.edu.ptit.android.entity;
+package vn.edu.ptit.android.utils;
 
 import java.util.ArrayList;
 
+import vn.edu.ptit.android.entity.Trips;
 import vn.ptit.edu.vn.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ public class TripsAdapter extends ArrayAdapter<Trips> {
 		this.layoutId = textViewResourceId;
 	}
 
+	@SuppressLint("ViewHolder")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		convertView = context.getLayoutInflater().inflate(layoutId, null);

@@ -5,7 +5,10 @@ import java.io.Serializable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Trips implements Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Trips implements Serializable, Parcelable {
 	/**
 	 * 
 	 */
@@ -118,5 +121,50 @@ public class Trips implements Serializable {
 		e.put("lotrinh", this.loTrinh);
 		return e;
 	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeInt(id);
+		dest.writeInt(taiXeid);
+		dest.writeString(loaiXe);
+		dest.writeString(thoiGian);
+		dest.writeInt(soGhe);
+		dest.writeInt(soGheCon);
+		dest.writeString(loTrinh);
+		dest.writeString(note);
+	}
+
+	private Trips(Parcel in) {
+		id = in.readInt();
+		taiXeid = in.readInt();
+		loaiXe = in.readString();
+		thoiGian = in.readString();
+		soGhe = in.readInt();
+		soGheCon = in.readInt();
+		loTrinh = in.readString();
+		note = in.readString();
+	}
+
+	public static final Parcelable.Creator<Trips> CREATOR = new Creator<Trips>() {
+
+		@Override
+		public Trips[] newArray(int size) {
+			// TODO Auto-generated method stub
+			return new Trips[size];
+		}
+
+		@Override
+		public Trips createFromParcel(Parcel source) {
+			// TODO Auto-generated method stub
+			return new Trips(source);
+		}
+	};
 
 }
