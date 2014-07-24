@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class LoginActivity extends Activity {
-	private static String url = "http://192.168.38.1:8080/CatchCar/LoginServlet";
+	private static String url = "http://192.168.38.1:8080/CatchCar/CheckUserServlet";
 
 	ActionBar actionBar;
 
@@ -42,8 +42,8 @@ public class LoginActivity extends Activity {
 		actionBar.hide();
 		setContentView(R.layout.login_activity);
 
-		etPassword = (EditText) findViewById(R.id.etUsername);
-		etUsername = (EditText) findViewById(R.id.etPassword);
+		etUsername = (EditText) findViewById(R.id.etUsername);
+		etPassword = (EditText) findViewById(R.id.etPassword);
 
 		btSignin = (ImageView) findViewById(R.id.btSignin);
 		btLogin = (ImageView) findViewById(R.id.btLogin);
