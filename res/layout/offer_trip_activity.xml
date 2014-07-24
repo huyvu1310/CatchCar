@@ -38,17 +38,18 @@
 
                 <TextView
                     android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Tỉnh/TP" />
+                    android:text="@string/city" />
 
-                <EditText
-                    android:id="@+id/editText2"
+                <AutoCompleteTextView
+                    android:id="@+id/actvCity"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:ems="10"
                     android:hint="" >
-                </EditText>
+                </AutoCompleteTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -59,35 +60,55 @@
 
                 <TextView
                     android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="Huyện/Quận" />
+                    android:layout_weight="2"
+                    android:text="@string/district" />
 
-                <EditText
-                    android:id="@+id/editText1"
+                <AutoCompleteTextView
+                    android:id="@+id/actvDistrict"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:ems="10"
+                    android:layout_weight="8"
                     android:hint="" >
-                </EditText>
+                </AutoCompleteTextView>
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="100dp"
+        <ImageButton
+            android:id="@+id/btAddTown"
+            android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_weight="6"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/add"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText3"
+    <TextView
+        android:id="@+id/tvTrip"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:layout_height="180dp" />
+  	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+  	    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Loại xe" />
+
+        <EditText
+            android:id="@+id/etCarType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:hint="" >
+
+        </EditText>
+  	</LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -97,16 +118,18 @@
 
         <TextView
             android:id="@+id/textView3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_weight="2"
             android:text="Số ghế" />
 
         <EditText
-            android:id="@+id/et2"
+            android:id="@+id/etNumOfSeat"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:ems="10"
+            android:layout_weight="8"
             android:hint="" >
+
         </EditText>
     </LinearLayout>
 
@@ -118,25 +141,27 @@
 
         <TextView
             android:id="@+id/textView4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:text="Ngày khởi hành" />
 
         <EditText
-            android:id="@+id/et3"
+            android:id="@+id/etDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:ems="10"
+            android:layout_weight="8"
             android:hint="" >
+
         </EditText>
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <ImageButton
+            android:id="@+id/btDate"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/date"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 
     <LinearLayout
@@ -147,25 +172,27 @@
 
         <TextView
             android:id="@+id/textView5"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:text="Giờ xuất phát" />
 
         <EditText
-            android:id="@+id/et4"
+            android:id="@+id/etTime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:ems="10"
+            android:layout_weight="8"
             android:hint="" >
+
         </EditText>
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <ImageButton
+            android:id="@+id/btTime"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/clock"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 
     <LinearLayout
@@ -176,14 +203,14 @@
         android:weightSum="10" >
 
         <Button
-            android:id="@+id/bt3"
+            android:id="@+id/btPublish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="Đăng tin" />
 
         <Button
-            android:id="@+id/bt4"
+            android:id="@+id/btCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="4"
