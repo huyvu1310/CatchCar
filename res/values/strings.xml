@@ -9,5 +9,16 @@
     <string name="so_luong_ket_qua">Số lượng kết quả</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="fullname">Fullname</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="repassword">Confirm</string>
+    <string name="gmap">Gmap</string>
+    <string name="tim_kiem_chuyen_xe">Tìm kiếm chuyến xe</string>
+    <string name = "dang_tin">Đăng tin</string>
+    <string name="chat">Chat</string>
+    <string name="quan_ly_tai_khoan">Quản lý Tài khoản</string>
+    <string name ="login">Đăng nhập</string>
+    <string name="huong_dang">Hướng dẫn</string>
 
 </resources>
