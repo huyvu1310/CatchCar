@@ -1,5 +1,7 @@
 package vn.edu.ptit.android.activity;
 
+import java.util.ArrayList;
+
 import vn.edu.ptit.android.entity.Trips;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 
 public class ChiTietActivity extends Activity {
 	
-	TextView tvMota, tvSoGhe, tvNgay, tvGio;
+	TextView tvMota, tvSoGheCon, tvNgay, tvGio;
 	Button btLienLac, btGui;
 	Trips trip = null;
 	String thoiGian, gio, ngay;
@@ -23,7 +25,7 @@ public class ChiTietActivity extends Activity {
 		setContentView(R.layout.chi_tiet_chuyen_xe);
 		
 		tvMota = (TextView) findViewById(R.id.tvMoTa);
-		tvSoGhe = (TextView) findViewById(R.id.tvSoGhe);
+		tvSoGheCon = (TextView) findViewById(R.id.tvSoGheCon);
 		tvNgay = (TextView) findViewById(R.id.tvNgay);
 		tvGio = (TextView) findViewById(R.id.tvGio);
 		
@@ -31,23 +33,30 @@ public class ChiTietActivity extends Activity {
 		btLienLac = (Button) findViewById(R.id.btLienLac);
 		btGui = (Button) findViewById(R.id.btGuiYeuCau);
 		
-		trip = (Trips) getIntent().getSerializableExtra("trip");
+		ArrayList<Trips> arr = getIntent().getParcelableArrayListExtra("listResultTrips");
+		int position = getIntent().getIntExtra("position", 0);
 		
-		if(trip!=null){
+		if(arr.get(position)!=null){
 			
-			
+			trip = arr.get(position);
 			
 			tvMota.setText(trip.getLoTrinh());
-			tvSoGhe.setText(trip.getSoGhe());
+			tvSoGheCon.setText(trip.getSoGheCon());
 			
+			String[] tmp = trip.getThoiGian().split(" ");
+			
+			tvGio.setText(tmp[0] + ":" + tmp[1]);
+			tvNgay.setText(tmp[2] + "/" + tmp[3] + "/" + tmp[4]);
 		}
+		
 		
 		btLienLac.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent in = new Intent();
+				Intent in = new Intent(getApplicationContext(), ChatActivity.class);
+				startActivity(in);
 			}
 		});
 		
