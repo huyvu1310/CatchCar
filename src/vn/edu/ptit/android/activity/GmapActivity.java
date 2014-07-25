@@ -17,22 +17,13 @@ import vn.edu.ptit.android.utils.Util;
 import vn.ptit.edu.vn.R;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Menu;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -85,6 +76,8 @@ public class GmapActivity extends FragmentActivity {
 			drawMarker();
 		}
 	}
+
+
 
 	private String getDirectionsUrl(LatLng origin, LatLng dest) {
 		String str_origin = "origin=" + origin.latitude + ","

@@ -155,5 +155,14 @@ public class MainApp extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		twoByTwo1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainApp.this, GmapActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 }
