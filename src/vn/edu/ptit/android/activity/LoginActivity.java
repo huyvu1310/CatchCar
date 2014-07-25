@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -35,11 +37,10 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
-		actionBar = getActionBar();
-		actionBar.setTitle("");
-		actionBar.setSubtitle(getResources().getString(R.string.app_name));
-		actionBar.hide();
 		setContentView(R.layout.login_activity);
 
 		etPassword = (EditText) findViewById(R.id.etUsername);

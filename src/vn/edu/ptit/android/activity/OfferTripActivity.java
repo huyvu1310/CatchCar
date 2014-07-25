@@ -1,7 +1,12 @@
 package vn.edu.ptit.android.activity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -14,6 +19,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
+import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
 import vn.edu.ptit.android.utils.TripsAdapter;
 import vn.ptit.edu.vn.R;
@@ -25,8 +32,13 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -47,10 +59,14 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private EditText etTime;
 	private EditText etCarType;
 	private Button btPublish, btCancel;
-	private ImageButton btDate, btTime, btAddTown;
+	private ImageButton btDate, btTime, btAddTown, btEraser;
 	static final int DATE_DIALOG_ID = 0;
 	static final int TIME_DIALOG_ID = 1;
 	private int year, month, day, hour, minute;
+
+	private final List<String> PLACE = new LinkedList<String>();
+	private String[] DISTRICT = new String[50];
+	private ArrayList<Place> place_district = new ArrayList<Place>();
 
 	private DatePickerDialog.OnDateSetListener dateListener = new OnDateSetListener() {
 
@@ -77,6 +93,9 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.offer_trip_activity);
 		actvCity = (AutoCompleteTextView) findViewById(R.id.actvCity);
@@ -87,6 +106,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		etTime = (EditText) findViewById(R.id.etTime);
 		etCarType = (EditText) findViewById(R.id.etCarType);
 		btPublish = (Button) findViewById(R.id.btPublish);
+		btEraser = (ImageButton) findViewById(R.id.btEraser);
 		btPublish.setOnClickListener(this);
 		btCancel = (Button) findViewById(R.id.btCancel);
 		btCancel.setOnClickListener(this);
@@ -100,6 +120,71 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH);
 		day = cal.get(Calendar.DAY_OF_MONTH);
+
+		// init autotextview
+		loadPlaceDistrict();
+		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
+				android.R.layout.simple_dropdown_item_1line, PLACE);
+		actvCity.setAdapter(adapterPLACE);
+		actvCity.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				String place = actvCity.getText().toString();
+				for (Place p : place_district) {
+					if (p.getPlace().equals(place)) {
+						DISTRICT = p.getDistrict();
+						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
+								OfferTripActivity.this,
+								android.R.layout.simple_dropdown_item_1line,
+								DISTRICT);
+						actvDistrict.setAdapter(adapterDISTRICT);
+					}
+				}
+			}
+		});
+
+		btEraser.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				tvTrip.setText("");
+			}
+		});
+	}
+
+	private void loadPlaceDistrict() {
+		try {
+			InputStream inputStream = getAssets().open("PLACE-DISTRICT.txt");
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					inputStream, "UTF-8"));
+			String str;
+			while ((str = in.readLine()) != null) {
+				Place _place = new Place(str);
+				place_district.add(_place);
+				PLACE.add(_place.getPlace());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	protected void updateTime() {
@@ -171,8 +256,9 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			try {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
-				Trips trip = new Trips(1, 3, etCarType.getText().toString(), etDate.getText().toString()
-						+ "-" + etTime.getText().toString(), soghe, soghe,
+				Trips trip = new Trips(1, 3, etCarType.getText().toString(),
+						etDate.getText().toString() + "-"
+								+ etTime.getText().toString(), soghe, soghe,
 						tvTrip.getText().toString(), "dasd");
 				JSONObject obj = trip.toJSON();
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
