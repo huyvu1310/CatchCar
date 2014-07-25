@@ -108,7 +108,7 @@ public class MainApp extends Activity {
 		GridLayout.LayoutParams sixth = new GridLayout.LayoutParams(row4,
 				colspan2);
 		sixth.width = screenWidth;
-		sixth.height = (int)(quarterScreenWidth * 1f);
+		sixth.height = (int)(quarterScreenWidth * 1.25f);
 		twoByTwo2.setLayoutParams(sixth);
 		twoByTwo2.setGravity(Gravity.CENTER_HORIZONTAL);
 		twoByTwo2.setBackgroundResource(R.drawable.login);
