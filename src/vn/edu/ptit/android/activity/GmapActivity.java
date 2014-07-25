@@ -17,22 +17,13 @@ import vn.edu.ptit.android.utils.Util;
 import vn.ptit.edu.vn.R;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Menu;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -58,7 +49,8 @@ public class GmapActivity extends FragmentActivity {
 		setContentView(R.layout.gmap_activity);
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getBaseContext());
-		double[] trips = getIntent().getDoubleArrayExtra("lotrinh");
+		//double[] trips = getIntent().getDoubleArrayExtra("lotrinh");
+		double[] trips = {21.0278766,105.832426,21.0245217,105.8326727,21.0261741,105.8375973};
 		if (status != ConnectionResult.SUCCESS) { // Google Play Services are
 													// not available
 			int requestCode = 10;
@@ -84,6 +76,8 @@ public class GmapActivity extends FragmentActivity {
 			drawMarker();
 		}
 	}
+
+
 
 	private String getDirectionsUrl(LatLng origin, LatLng dest) {
 		String str_origin = "origin=" + origin.latitude + ","
