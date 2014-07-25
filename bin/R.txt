@@ -105,7 +105,8 @@ int drawable login 0x7f02002c
 int drawable powered_by_google_dark 0x7f02002d
 int drawable powered_by_google_light 0x7f02002e
 int drawable red 0x7f02002f
-int drawable win7_1360x7681 0x7f020030
+int drawable style_rectangle_no_color 0x7f020030
+int drawable win7_1360x7681 0x7f020031
 int id GridLayout1 0x7f070033
 int id actvCity 0x7f070035
 int id actvDistrict 0x7f070036
@@ -128,7 +129,6 @@ int id btPublish 0x7f070040
 int id btSearch 0x7f07004b
 int id btSignin 0x7f070031
 int id btTime 0x7f07003f
-int id bt_Cancel_Signin 0x7f070057
 int id bt_OK_Signin 0x7f070056
 int id buyButton 0x7f07000a
 int id buy_now 0x7f07000f
