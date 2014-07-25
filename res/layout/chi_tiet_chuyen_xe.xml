@@ -20,8 +20,7 @@
             android:id="@+id/tvMoTa"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:ems="10"
-            android:inputType="textMultiLine" />
+            android:ems="10" />
 
         <ImageView
             android:id="@+id/imageViewGmap"

@@ -36,17 +36,21 @@ public class ChiTietActivity extends Activity {
 		ArrayList<Trips> arr = getIntent().getParcelableArrayListExtra("listResultTrips");
 		int position = getIntent().getIntExtra("position", 0);
 		
-		if(arr.get(position)!=null){
+		System.out.println(position);
+		
+		if(arr!=null&&arr.get(position)!=null){
 			
 			trip = arr.get(position);
 			
 			tvMota.setText(trip.getLoTrinh());
-			tvSoGheCon.setText(trip.getSoGheCon());
+			tvSoGheCon.setText(String.valueOf(trip.getSoGheCon()));
+			tvGio.setText(trip.getThoiGian());
+			tvNgay.setText(trip.getThoiGian());
 			
-			String[] tmp = trip.getThoiGian().split(" ");
-			
-			tvGio.setText(tmp[0] + ":" + tmp[1]);
-			tvNgay.setText(tmp[2] + "/" + tmp[3] + "/" + tmp[4]);
+//			String[] tmp = trip.getThoiGian().split(" ");
+//			
+//			tvGio.setText(tmp[0] + ":" + tmp[1]);
+//			tvNgay.setText(tmp[2] + "/" + tmp[3] + "/" + tmp[4]);
 		}
 		
 		
