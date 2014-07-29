@@ -1,32 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/GridLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:columnCount="2"
-    android:orientation="horizontal"
-    android:rowCount="3"
-    tools:context=".GridXMLActivity" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7" >
 
-    <!-- <Button
-        android:id="@+id/button1"
-        android:layout_gravity="left|top"
-        android:text="Button" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:background="@drawable/style_rectangle_no_color" >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_gravity="left|top"
-        android:text="Button" />
+        <TextView
+            android:id="@+id/tvGmap"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="2dp"
+            android:background="@drawable/google_map_logo"
+            android:gravity="center" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_gravity="left|top"
-        android:text="Button" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:background="#0000ff"
+        android:orientation="vertical"
+        android:weightSum="3" >
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_gravity="left|top"
-        android:text="Button" /> -->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#0000ff"
+            android:orientation="vertical"
+            android:weightSum="2" >
 
-</GridLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#ff00ff"
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <TextView
+                    android:id="@+id/tvTimkiem"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_rectangle_no_color"
+                    android:gravity="center"
+                    android:text="@string/tim_kiem_chuyen_xe" />
+
+                <TextView
+                    android:id="@+id/tvDangtin"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_rectangle_no_color"
+                    android:gravity="center"
+                    android:text="@string/dang_tin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#ff00ff"
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <TextView
+                    android:id="@+id/tvChat"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_rectangle_no_color"
+                    android:gravity="center"
+                    android:text="@string/chat" />
+
+                <TextView
+                    android:id="@+id/tvHuongdan"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_rectangle_no_color"
+                    android:gravity="center"
+                    android:text="@string/huong_dang" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:background="@drawable/style_rectangle_no_color" >
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="@string/login" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
