@@ -21,7 +21,7 @@ public class ChatActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.chat_activity); s
+		setContentView(R.layout.chat_activity);
 		lvChat = (ListView) findViewById(R.id.lvChat);
 		lvChat.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
 		adapter = new CommentAdapter(getApplicationContext(), R.layout.chat_listview);

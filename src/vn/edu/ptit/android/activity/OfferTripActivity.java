@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
+import vn.edu.ptit.android.utils.RouteAdaper;
 import vn.edu.ptit.android.utils.TripsAdapter;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
@@ -30,6 +31,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -44,6 +46,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -53,13 +56,14 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 
 	private AutoCompleteTextView actvCity;
 	private AutoCompleteTextView actvDistrict;
-	private TextView tvTrip;
+	private ListView lvRoutes;
+	private RouteAdaper routeAdapter;
 	private EditText etNumOfSeat;
 	private EditText etDate;
 	private EditText etTime;
 	private EditText etCarType;
 	private Button btPublish, btCancel;
-	private ImageButton btDate, btTime, btAddTown, btEraser;
+	private ImageButton btDate, btTime, btAddTown,btGmap;
 	static final int DATE_DIALOG_ID = 0;
 	static final int TIME_DIALOG_ID = 1;
 	private int year, month, day, hour, minute;
@@ -100,13 +104,11 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.offer_trip_activity);
 		actvCity = (AutoCompleteTextView) findViewById(R.id.actvCity);
 		actvDistrict = (AutoCompleteTextView) findViewById(R.id.actvDistrict);
-		tvTrip = (TextView) findViewById(R.id.tvTrip);
 		etNumOfSeat = (EditText) findViewById(R.id.etNumOfSeat);
 		etDate = (EditText) findViewById(R.id.etDate);
 		etTime = (EditText) findViewById(R.id.etTime);
 		etCarType = (EditText) findViewById(R.id.etCarType);
 		btPublish = (Button) findViewById(R.id.btPublish);
-		btEraser = (ImageButton) findViewById(R.id.btEraser);
 		btPublish.setOnClickListener(this);
 		btCancel = (Button) findViewById(R.id.btCancel);
 		btCancel.setOnClickListener(this);
@@ -116,11 +118,15 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		btTime.setOnClickListener(this);
 		btAddTown = (ImageButton) findViewById(R.id.btAddTown);
 		btAddTown.setOnClickListener(this);
+		btGmap = (ImageButton) findViewById(R.id.btGmap);
+		btGmap.setOnClickListener(this);
 		Calendar cal = Calendar.getInstance();
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH);
 		day = cal.get(Calendar.DAY_OF_MONTH);
-
+		lvRoutes = (ListView) findViewById(R.id.lvRoutes);
+		routeAdapter = new RouteAdaper(getApplicationContext(), R.layout.offer_trip_listview, new ArrayList<String>());
+		lvRoutes.setAdapter(routeAdapter);
 		// init autotextview
 		loadPlaceDistrict();
 		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
@@ -159,14 +165,6 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			}
 		});
 
-		btEraser.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				tvTrip.setText("");
-			}
-		});
 	}
 
 	private void loadPlaceDistrict() {
@@ -202,9 +200,8 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		switch (arg0.getId()) {
 		case R.id.btAddTown:
 			if (!actvCity.equals("") && !actvDistrict.equals("")) {
-				tvTrip.setText(tvTrip.getText().toString()
-						+ actvCity.getText().toString() + "-"
-						+ actvDistrict.getText().toString() + ',');
+				routeAdapter.add(actvCity.getText().toString() + "-"
+						+ actvDistrict.getText().toString());
 				actvCity.setText("");
 				actvDistrict.setText("");
 			}
@@ -216,11 +213,15 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			showDialog(TIME_DIALOG_ID);
 			break;
 		case R.id.btCancel:
-			Toast.makeText(this, "????", 4).show();
+			this.finish();
 			break;
 		case R.id.btPublish:
 			AddMethod addMethod = new AddMethod();
 			addMethod.execute(new String[] { url });
+			break;
+		case R.id.btGmap:
+			Intent intent = new Intent(this,GmapActivity.class);
+			startActivity(intent);
 			break;
 		default:
 			break;
@@ -256,10 +257,16 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			try {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				int soghe = Integer.parseInt(etNumOfSeat.getText().toString());
+				StringBuilder route = new StringBuilder();
+				List<String> routeList = routeAdapter.getRoute();
+				for (int i = 0; i < routeList.size(); i++) {
+					route.append(routeList.get(i));
+					route.append(";");
+				}
 				Trips trip = new Trips(1, 3, etCarType.getText().toString(),
 						etDate.getText().toString() + "-"
 								+ etTime.getText().toString(), soghe, soghe,
-						tvTrip.getText().toString(), "dasd");
+					route.toString(), "none");
 				JSONObject obj = trip.toJSON();
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
 				list.add(new BasicNameValuePair("add", obj.toString()));

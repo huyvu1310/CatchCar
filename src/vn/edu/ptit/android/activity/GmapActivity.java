@@ -17,16 +17,24 @@ import vn.edu.ptit.android.utils.Util;
 import vn.ptit.edu.vn.R;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -50,7 +58,7 @@ public class GmapActivity extends FragmentActivity {
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getBaseContext());
 		//double[] trips = getIntent().getDoubleArrayExtra("lotrinh");
-		double[] trips = {21.0278766,105.832426,21.0245217,105.8326727,21.0261741,105.8375973};
+		double[] trips = {20.971358, 105.783663,21.0245217,105.8326727,21.0261741,105.8375973};
 		if (status != ConnectionResult.SUCCESS) { // Google Play Services are
 													// not available
 			int requestCode = 10;
@@ -63,18 +71,63 @@ public class GmapActivity extends FragmentActivity {
 					.findFragmentById(R.id.map);
 			mGoogleMap = fm.getMap();
 			mGoogleMap.setMyLocationEnabled(true);
+//			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+//			Criteria criteria = new Criteria();
+//			String provider = locationManager.getBestProvider(criteria, true);
+//			Location location = locationManager.getLastKnownLocation(provider);
+//			LocationListener locationListener = new LocationListener() {
+//
+//				@Override
+//				public void onLocationChanged(Location location) {
+//					// TODO Auto-generated method stub
+//					drawMarker(location);
+//				}
+//
+//				@Override
+//				public void onStatusChanged(String provider, int status,
+//						Bundle extras) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//
+//				@Override
+//				public void onProviderEnabled(String provider) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//
+//				@Override
+//				public void onProviderDisabled(String provider) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//			};
+//			if (location != null) {
+//				drawMarker(location);
+//			}
+//			locationManager.requestLocationUpdates(provider, 20000, 0,
+//					locationListener);
+//			mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(20.971358, 105.783663)));
+//            mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 			if (mMarkerPoints.size()>=2){
 				for (int i = 0; i < mMarkerPoints.size()-1; i++) {
 					LatLng origin = mMarkerPoints.get(i);
                     LatLng dest = mMarkerPoints.get(i+1);
                     String url = getDirectionsUrl(origin, dest);
                     DownloadTask downloadTask = new DownloadTask();
-                    // Start downloading json data from Google Directions API
                     downloadTask.execute(url);
 				}
 			}
 			drawMarker();
 		}
+	}
+
+
+
+	protected void drawMarker(Location location) {
+		mGoogleMap.clear();
+		LatLng currentPosition = new LatLng(location.getLatitude(),
+				location.getLongitude());
 	}
 
 
@@ -86,7 +139,6 @@ public class GmapActivity extends FragmentActivity {
 		String sensor = "sensor=false";
 		String parameters = str_origin + "&" + str_dest + "&" + sensor;
 		String output = "json";
-		// Building the url to the web service
 		String url = "https://maps.googleapis.com/maps/api/directions/"
 				+ output + "?" + parameters;
 		return url;
@@ -99,8 +151,6 @@ public class GmapActivity extends FragmentActivity {
 		HttpURLConnection urlConnection = null;
 		try {
 			URL url = new URL(strUrl);
-
-			// Creating an http connection to communicate with url
 			urlConnection = (HttpURLConnection) url.openConnection();
 			urlConnection.connect();
 			iStream = urlConnection.getInputStream();
@@ -125,15 +175,10 @@ public class GmapActivity extends FragmentActivity {
 	/** A class to download data from Google Directions URL */
 	private class DownloadTask extends AsyncTask<String, Void, String> {
 
-		// Downloading data in non-ui thread
 		@Override
 		protected String doInBackground(String... url) {
-
-			// For storing data from web service
 			String data = "";
-
 			try {
-				// Fetching the data from web service
 				data = downloadUrl(url[0]);
 			} catch (Exception e) {
 				Log.d("Background Task", e.toString());
@@ -141,15 +186,10 @@ public class GmapActivity extends FragmentActivity {
 			return data;
 		}
 
-		// Executes in UI thread, after the execution of
-		// doInBackground()
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-
 			ParserTask parserTask = new ParserTask();
-
-			// Invokes the thread for parsing the JSON data
 			parserTask.execute(result);
 		}
 	}
@@ -217,19 +257,17 @@ public class GmapActivity extends FragmentActivity {
 	private void drawMarker() {
 		// Creating MarkerOptions
 		MarkerOptions options = new MarkerOptions();
-
+		options.icon(BitmapDescriptorFactory
+				.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+		LatLngBounds.Builder b = new LatLngBounds.Builder();
 		// Setting the position of the marker
 		for (int i = 0; i < mMarkerPoints.size(); i++) {
 			options.position(mMarkerPoints.get(i));
+			b.include(mMarkerPoints.get(i));
+			mGoogleMap.addMarker(options);
 		}
-		if (mMarkerPoints.size() == 1) {
-			options.icon(BitmapDescriptorFactory
-					.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-		} else if (mMarkerPoints.size() == 2) {
-			options.icon(BitmapDescriptorFactory
-					.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-		}
-		// Add new marker to the Google Map Android API V2
-		mGoogleMap.addMarker(options);
+		LatLngBounds bounds = b.build();
+		CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 25,25,5);
+		mGoogleMap.animateCamera(cu);
 	}
 }
