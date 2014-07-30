@@ -20,6 +20,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import vn.edu.ptit.android.entity.District;
 import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
 import vn.ptit.edu.vn.R;
@@ -45,7 +46,7 @@ public class SearchActivity extends Activity {
 	AutoCompleteTextView tvFromPlace, tvFromDistrict, tvToPlace, tvToDistrict;
 
 	private final List<String> PLACE = new LinkedList<String>();
-	private String[] DISTRICT = new String[50];
+	private List<String> DISTRICT = new LinkedList<String>();
 	private ArrayList<Place> place_district = new ArrayList<Place>();
 
 	@Override
@@ -95,7 +96,10 @@ public class SearchActivity extends Activity {
 				String place = tvFromPlace.getText().toString();
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
-						DISTRICT = p.getDistrict();
+						List<District> list = p.getDistrictList();
+						for (int i = 0; i < list.size(); i++) {
+							DISTRICT.add(list.get(i).getName());
+						}
 						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
 								SearchActivity.this,
 								android.R.layout.simple_dropdown_item_1line,
@@ -128,7 +132,10 @@ public class SearchActivity extends Activity {
 				String place = tvToPlace.getText().toString();
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
-						DISTRICT = p.getDistrict();
+						List<District> list = p.getDistrictList();
+						for (int i = 0; i < list.size(); i++) {
+							DISTRICT.add(list.get(i).getName());
+						}
 						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
 								SearchActivity.this,
 								android.R.layout.simple_dropdown_item_1line,

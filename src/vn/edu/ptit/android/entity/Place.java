@@ -1,6 +1,8 @@
 package vn.edu.ptit.android.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Place implements Serializable {
 
@@ -9,24 +11,25 @@ public class Place implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	String place;
-	String[] district;
+	List<District> districtList;
 
 	public Place() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Place(String place, String[] district) {
+	public Place(String place, List<District> district) {
 		super();
 		this.place = place;
-		this.district = district;
+		this.districtList = district;
 	}
 
 	public Place(String string) {
 		String[] tmp = string.split(":");
 		this.place = tmp[0].trim();
-		this.district= tmp[1].split("-");
-		for (String s : district) {
-			s.trim();
+		String[] disTmp = tmp[1].split("-");
+		districtList = new ArrayList<District>();
+		for (int i = 0; i < disTmp.length; i++) {
+			districtList.add(new District(disTmp[i]));
 		}
 	}
 
@@ -38,12 +41,13 @@ public class Place implements Serializable {
 		this.place = place;
 	}
 
-	public String[] getDistrict() {
-		return district;
+	public List<District> getDistrictList() {
+		return districtList;
 	}
 
-	public void setDistrict(String[] district) {
-		this.district = district;
+	public void setDistrictList(List<District> districtList) {
+		this.districtList = districtList;
 	}
+	
 
 }

@@ -20,10 +20,14 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import vn.edu.ptit.android.entity.District;
 import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
 import vn.edu.ptit.android.utils.RouteAdaper;
 import vn.edu.ptit.android.utils.TripsAdapter;
+import vn.edu.ptit.android.utils.Util;
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -69,8 +73,9 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private int year, month, day, hour, minute;
 
 	private final List<String> PLACE = new LinkedList<String>();
-	private String[] DISTRICT = new String[50];
+	private List<String> DISTRICT = new LinkedList<String>();
 	private ArrayList<Place> place_district = new ArrayList<Place>();
+	private ArrayList<LatLng> coordinateList = new ArrayList<LatLng>();
 
 	private DatePickerDialog.OnDateSetListener dateListener = new OnDateSetListener() {
 
@@ -154,7 +159,10 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 				String place = actvCity.getText().toString();
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
-						DISTRICT = p.getDistrict();
+						List<District> list = p.getDistrictList();
+						for (int i = 0; i < list.size(); i++) {
+							DISTRICT.add(list.get(i).getName());
+						}
 						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
 								OfferTripActivity.this,
 								android.R.layout.simple_dropdown_item_1line,
@@ -220,7 +228,23 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			addMethod.execute(new String[] { url });
 			break;
 		case R.id.btGmap:
+			String[] tmp;
+			coordinateList = new ArrayList<LatLng>();
+			for (int i = 0; i < routeAdapter.getCount()-1; i++) {
+				tmp = routeAdapter.getItem(i).split("-");
+				for (Place p : place_district) {
+					if (p.getPlace().equals(tmp[0])) {
+						List<District> list = p.getDistrictList();
+						for (int j = 0; j < list.size(); j++) {
+							if (list.get(j).getName().equals(tmp[1])){
+								coordinateList.add(list.get(j).getCoordinate());
+							}
+						}
+					}
+				}
+			}
 			Intent intent = new Intent(this,GmapActivity.class);
+			intent.putExtra("list", Util.latLngToDouble(coordinateList));
 			startActivity(intent);
 			break;
 		default:

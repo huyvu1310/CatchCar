@@ -58,7 +58,7 @@ public class GmapActivity extends FragmentActivity {
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getBaseContext());
 		//double[] trips = getIntent().getDoubleArrayExtra("lotrinh");
-		double[] trips = {20.971358, 105.783663,21.0245217,105.8326727,21.0261741,105.8375973};
+		double[] trips = getIntent().getDoubleArrayExtra("list");
 		if (status != ConnectionResult.SUCCESS) { // Google Play Services are
 													// not available
 			int requestCode = 10;
