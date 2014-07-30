@@ -2,6 +2,8 @@ package vn.edu.ptit.android.entity;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 public class District implements Serializable{
@@ -10,7 +12,7 @@ public class District implements Serializable{
 	private LatLng coordinate;
 	
 	public District(String s){
-		String[] tmp = s.split("|");
+		String[] tmp = s.trim().split(",");
 		this.name = tmp[0].trim();
 		this.coordinate = new LatLng(Double.parseDouble(tmp[1].trim()), Double.parseDouble(tmp[2].trim()));
 	}

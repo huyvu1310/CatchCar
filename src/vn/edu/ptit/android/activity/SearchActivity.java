@@ -97,6 +97,7 @@ public class SearchActivity extends Activity {
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
 						List<District> list = p.getDistrictList();
+						DISTRICT.clear();
 						for (int i = 0; i < list.size(); i++) {
 							DISTRICT.add(list.get(i).getName());
 						}
@@ -105,6 +106,7 @@ public class SearchActivity extends Activity {
 								android.R.layout.simple_dropdown_item_1line,
 								DISTRICT);
 						tvFromDistrict.setAdapter(adapterDISTRICT);
+						break;
 					}
 				}
 			}
@@ -133,6 +135,7 @@ public class SearchActivity extends Activity {
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
 						List<District> list = p.getDistrictList();
+						DISTRICT.clear();
 						for (int i = 0; i < list.size(); i++) {
 							DISTRICT.add(list.get(i).getName());
 						}
@@ -141,6 +144,7 @@ public class SearchActivity extends Activity {
 								android.R.layout.simple_dropdown_item_1line,
 								DISTRICT);
 						tvToDistrict.setAdapter(adapterDISTRICT);
+						break;
 					}
 				}
 			}

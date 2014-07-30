@@ -12,9 +12,9 @@ public class Util {
 		return res;
 	}
 	public static double[] latLngToDouble(ArrayList<LatLng> arg){
-		double[] res = null;
+		double[] res = new double[arg.size()*2];
 		for (int i = 0; i < arg.size(); i++) {
-			res[i]=arg.get(i).latitude;
+			res[i*2]=arg.get(i).latitude;
 			res[i*2+1]= arg.get(i).longitude;
 		}
 		return res;

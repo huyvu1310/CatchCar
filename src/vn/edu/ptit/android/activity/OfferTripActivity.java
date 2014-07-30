@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -36,10 +37,13 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -160,6 +164,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
 						List<District> list = p.getDistrictList();
+						DISTRICT.clear();
 						for (int i = 0; i < list.size(); i++) {
 							DISTRICT.add(list.get(i).getName());
 						}
@@ -168,6 +173,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 								android.R.layout.simple_dropdown_item_1line,
 								DISTRICT);
 						actvDistrict.setAdapter(adapterDISTRICT);
+						break;
 					}
 				}
 			}
@@ -210,8 +216,10 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			if (!actvCity.equals("") && !actvDistrict.equals("")) {
 				routeAdapter.add(actvCity.getText().toString() + "-"
 						+ actvDistrict.getText().toString());
+
 				actvCity.setText("");
 				actvDistrict.setText("");
+				
 			}
 			break;
 		case R.id.btDate:
@@ -230,21 +238,25 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		case R.id.btGmap:
 			String[] tmp;
 			coordinateList = new ArrayList<LatLng>();
-			for (int i = 0; i < routeAdapter.getCount()-1; i++) {
+			for (int i = 0; i < routeAdapter.getCount(); i++) {
 				tmp = routeAdapter.getItem(i).split("-");
 				for (Place p : place_district) {
-					if (p.getPlace().equals(tmp[0])) {
+					if (p.getPlace().equalsIgnoreCase(tmp[0])) {
 						List<District> list = p.getDistrictList();
 						for (int j = 0; j < list.size(); j++) {
-							if (list.get(j).getName().equals(tmp[1])){
+							if (list.get(j).getName().equalsIgnoreCase(tmp[1])){
 								coordinateList.add(list.get(j).getCoordinate());
+								Log.d("route", list.get(j).getCoordinate().latitude+" "+list.get(j).getCoordinate().longitude);
 							}
 						}
+						break;
 					}
 				}
 			}
 			Intent intent = new Intent(this,GmapActivity.class);
-			intent.putExtra("list", Util.latLngToDouble(coordinateList));
+			double[] list = Util.latLngToDouble(coordinateList);
+			intent.putExtra("list",list);
+			//Log.d("route", list[0]+" "+list[1]+" "+list[2]+" "+list[3]+ list.length);
 			startActivity(intent);
 			break;
 		default:

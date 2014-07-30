@@ -55,10 +55,12 @@ public class GmapActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.gmap_activity);
+		//double[] trips = {22.8025588,104.97844940000004,22.4450248,104.89216680000004};
+		double[] trips = getIntent().getDoubleArrayExtra("list");
+		//Log.d("route", trips[0]+" "+trips[1]+" "+trips[2]+" "+trips[3]+" "+trips.length);
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getBaseContext());
-		//double[] trips = getIntent().getDoubleArrayExtra("lotrinh");
-		double[] trips = getIntent().getDoubleArrayExtra("list");
+		
 		if (status != ConnectionResult.SUCCESS) { // Google Play Services are
 													// not available
 			int requestCode = 10;
@@ -71,44 +73,6 @@ public class GmapActivity extends FragmentActivity {
 					.findFragmentById(R.id.map);
 			mGoogleMap = fm.getMap();
 			mGoogleMap.setMyLocationEnabled(true);
-//			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-//			Criteria criteria = new Criteria();
-//			String provider = locationManager.getBestProvider(criteria, true);
-//			Location location = locationManager.getLastKnownLocation(provider);
-//			LocationListener locationListener = new LocationListener() {
-//
-//				@Override
-//				public void onLocationChanged(Location location) {
-//					// TODO Auto-generated method stub
-//					drawMarker(location);
-//				}
-//
-//				@Override
-//				public void onStatusChanged(String provider, int status,
-//						Bundle extras) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onProviderEnabled(String provider) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onProviderDisabled(String provider) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//			};
-//			if (location != null) {
-//				drawMarker(location);
-//			}
-//			locationManager.requestLocationUpdates(provider, 20000, 0,
-//					locationListener);
-//			mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(20.971358, 105.783663)));
-//            mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
 			if (mMarkerPoints.size()>=2){
 				for (int i = 0; i < mMarkerPoints.size()-1; i++) {
 					LatLng origin = mMarkerPoints.get(i);
@@ -267,7 +231,7 @@ public class GmapActivity extends FragmentActivity {
 			mGoogleMap.addMarker(options);
 		}
 		LatLngBounds bounds = b.build();
-		CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 25,25,5);
+		CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,250,250,5);
 		mGoogleMap.animateCamera(cu);
 	}
 }
