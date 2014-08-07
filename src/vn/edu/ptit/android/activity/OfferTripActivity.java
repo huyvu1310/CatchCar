@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import vn.edu.ptit.android.entity.District;
 import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
+import vn.edu.ptit.android.utils.PlacesAutoCompleteAdapter;
 import vn.edu.ptit.android.utils.RouteAdaper;
 import vn.edu.ptit.android.utils.TripsAdapter;
 import vn.edu.ptit.android.utils.Util;
@@ -71,7 +72,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private EditText etTime;
 	private EditText etCarType;
 	private Button btPublish, btCancel;
-	private ImageButton btDate, btTime, btAddTown,btGmap;
+	private ImageButton btDate, btTime, btAddTown, btGmap;
 	static final int DATE_DIALOG_ID = 0;
 	static final int TIME_DIALOG_ID = 1;
 	private int year, month, day, hour, minute;
@@ -134,13 +135,17 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		month = cal.get(Calendar.MONTH);
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		lvRoutes = (ListView) findViewById(R.id.lvRoutes);
-		routeAdapter = new RouteAdaper(getApplicationContext(), R.layout.offer_trip_listview, new ArrayList<String>());
+		routeAdapter = new RouteAdaper(getApplicationContext(),
+				R.layout.offer_trip_listview, new ArrayList<String>());
 		lvRoutes.setAdapter(routeAdapter);
 		// init autotextview
 		loadPlaceDistrict();
 		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, PLACE);
 		actvCity.setAdapter(adapterPLACE);
+		//actvCity.setAdapter(new PlacesAutoCompleteAdapter(
+		//		getApplicationContext(),
+		//		android.R.layout.simple_dropdown_item_1line));
 		actvCity.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -159,7 +164,6 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
 				String place = actvCity.getText().toString();
 				for (Place p : place_district) {
 					if (p.getPlace().equals(place)) {
@@ -176,6 +180,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 						break;
 					}
 				}
+
 			}
 		});
 
@@ -213,14 +218,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btAddTown:
-			if (!actvCity.equals("") && !actvDistrict.equals("")) {
-				routeAdapter.add(actvCity.getText().toString() + "-"
-						+ actvDistrict.getText().toString());
-
-				actvCity.setText("");
-				actvDistrict.setText("");
-				
-			}
+			btAddTownListener();
 			break;
 		case R.id.btDate:
 			showDialog(DATE_DIALOG_ID);
@@ -236,32 +234,43 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 			addMethod.execute(new String[] { url });
 			break;
 		case R.id.btGmap:
-			String[] tmp;
-			coordinateList = new ArrayList<LatLng>();
-			for (int i = 0; i < routeAdapter.getCount(); i++) {
-				tmp = routeAdapter.getItem(i).split("-");
-				for (Place p : place_district) {
-					if (p.getPlace().equalsIgnoreCase(tmp[0])) {
-						List<District> list = p.getDistrictList();
-						for (int j = 0; j < list.size(); j++) {
-							if (list.get(j).getName().equalsIgnoreCase(tmp[1])){
-								coordinateList.add(list.get(j).getCoordinate());
-								Log.d("route", list.get(j).getCoordinate().latitude+" "+list.get(j).getCoordinate().longitude);
-							}
-						}
-						break;
-					}
-				}
-			}
-			Intent intent = new Intent(this,GmapActivity.class);
-			double[] list = Util.latLngToDouble(coordinateList);
-			intent.putExtra("list",list);
-			//Log.d("route", list[0]+" "+list[1]+" "+list[2]+" "+list[3]+ list.length);
-			startActivity(intent);
+			btGmapListener();
 			break;
 		default:
 			break;
 		}
+	}
+
+	public void btAddTownListener() {
+		if (!actvCity.equals("") && !actvDistrict.equals("")) {
+			routeAdapter.add(actvCity.getText().toString() + "-"
+					+ actvDistrict.getText().toString());
+			actvCity.setText("");
+			actvDistrict.setText("");
+		}
+	}
+
+	public void btGmapListener() {
+		String[] tmp;
+		coordinateList = new ArrayList<LatLng>();
+		for (int i = 0; i < routeAdapter.getCount(); i++) {
+			tmp = routeAdapter.getItem(i).split("-");
+			for (Place p : place_district) {
+				if (p.getPlace().equalsIgnoreCase(tmp[0])) {
+					List<District> list = p.getDistrictList();
+					for (int j = 0; j < list.size(); j++) {
+						if (list.get(j).getName().equalsIgnoreCase(tmp[1])) {
+							coordinateList.add(list.get(j).getCoordinate());
+						}
+					}
+					break;
+				}
+			}
+		}
+		Intent intent = new Intent(this, GmapActivity.class);
+		double[] list = Util.latLngToDouble(coordinateList);
+		intent.putExtra("list", list);
+		startActivity(intent);
 	}
 
 	@Override
@@ -302,7 +311,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 				Trips trip = new Trips(1, 3, etCarType.getText().toString(),
 						etDate.getText().toString() + "-"
 								+ etTime.getText().toString(), soghe, soghe,
-					route.toString(), "none");
+						route.toString(), "none");
 				JSONObject obj = trip.toJSON();
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
 				list.add(new BasicNameValuePair("add", obj.toString()));

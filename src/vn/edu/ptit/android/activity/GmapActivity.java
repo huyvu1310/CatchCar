@@ -25,16 +25,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -55,12 +58,14 @@ public class GmapActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.gmap_activity);
-		//double[] trips = {22.8025588,104.97844940000004,22.4450248,104.89216680000004};
+		// double[] trips =
+		// {22.8025588,104.97844940000004,22.4450248,104.89216680000004};
 		double[] trips = getIntent().getDoubleArrayExtra("list");
-		//Log.d("route", trips[0]+" "+trips[1]+" "+trips[2]+" "+trips[3]+" "+trips.length);
+		// Log.d("route",
+		// trips[0]+" "+trips[1]+" "+trips[2]+" "+trips[3]+" "+trips.length);
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getBaseContext());
-		
+
 		if (status != ConnectionResult.SUCCESS) { // Google Play Services are
 													// not available
 			int requestCode = 10;
@@ -73,28 +78,50 @@ public class GmapActivity extends FragmentActivity {
 					.findFragmentById(R.id.map);
 			mGoogleMap = fm.getMap();
 			mGoogleMap.setMyLocationEnabled(true);
-			if (mMarkerPoints.size()>=2){
-				for (int i = 0; i < mMarkerPoints.size()-1; i++) {
-					LatLng origin = mMarkerPoints.get(i);
-                    LatLng dest = mMarkerPoints.get(i+1);
-                    String url = getDirectionsUrl(origin, dest);
-                    DownloadTask downloadTask = new DownloadTask();
-                    downloadTask.execute(url);
-				}
-			}
 			drawMarker();
+			drawRoute();
+			mGoogleMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+
+				@Override
+				public void onMarkerDragStart(Marker arg0) {
+					// TODO Auto-generated method stub
+					mMarkerPoints.remove(Integer.parseInt(arg0.getTitle()));
+				}
+
+				@Override
+				public void onMarkerDragEnd(Marker arg0) {
+					// TODO Auto-generated method stub
+					mGoogleMap.clear();
+					mMarkerPoints.add(Integer.parseInt(arg0.getTitle()), arg0.getPosition());;
+					drawMarker();
+					drawRoute();
+				}
+
+				@Override
+				public void onMarkerDrag(Marker arg0) {
+
+				}
+			});
 		}
 	}
 
-
+	public void drawRoute() {
+		if (mMarkerPoints.size() >= 2) {
+			for (int i = 0; i < mMarkerPoints.size() - 1; i++) {
+				LatLng origin = mMarkerPoints.get(i);
+				LatLng dest = mMarkerPoints.get(i + 1);
+				String url = getDirectionsUrl(origin, dest);
+				DownloadTask downloadTask = new DownloadTask();
+				downloadTask.execute(url);
+			}
+		}
+	}
 
 	protected void drawMarker(Location location) {
 		mGoogleMap.clear();
 		LatLng currentPosition = new LatLng(location.getLatitude(),
 				location.getLongitude());
 	}
-
-
 
 	private String getDirectionsUrl(LatLng origin, LatLng dest) {
 		String str_origin = "origin=" + origin.latitude + ","
@@ -221,17 +248,20 @@ public class GmapActivity extends FragmentActivity {
 	private void drawMarker() {
 		// Creating MarkerOptions
 		MarkerOptions options = new MarkerOptions();
+		options.draggable(true);
 		options.icon(BitmapDescriptorFactory
 				.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 		LatLngBounds.Builder b = new LatLngBounds.Builder();
 		// Setting the position of the marker
 		for (int i = 0; i < mMarkerPoints.size(); i++) {
 			options.position(mMarkerPoints.get(i));
+			options.title(String.valueOf(i));
 			b.include(mMarkerPoints.get(i));
 			mGoogleMap.addMarker(options);
 		}
 		LatLngBounds bounds = b.build();
-		CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,250,250,5);
+		CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 250, 250,
+				5);
 		mGoogleMap.animateCamera(cu);
 	}
 }
