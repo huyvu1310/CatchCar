@@ -1,9 +1,5 @@
-package vn.edu.ptit.android.activity;
+package vn.edu.ptit.android.tab;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,11 +16,12 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import vn.edu.ptit.android.activity.ResultSearchActivity;
 import vn.edu.ptit.android.entity.District;
 import vn.edu.ptit.android.entity.Place;
 import vn.edu.ptit.android.entity.Trips;
+import vn.edu.ptit.android.utils.LoadPlace;
 import vn.ptit.edu.vn.R;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,15 +34,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
-public class SearchActivity extends Activity {
-
-	ActionBar actionBar;
+public class SearchTab extends Activity {
 	ImageView btSearch;
 	private static String url = "http://192.168.38.1:8080/CatchCar/ChuyenxeServlet";
 
 	AutoCompleteTextView tvFromPlace, tvFromDistrict, tvToPlace, tvToDistrict;
 
-	private final List<String> PLACE = new LinkedList<String>();
+	private List<String> PLACE = new LinkedList<String>();
 	private List<String> DISTRICT = new LinkedList<String>();
 	private ArrayList<Place> place_district = new ArrayList<Place>();
 
@@ -53,120 +48,101 @@ public class SearchActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		actionBar = getActionBar();
-		actionBar.setTitle("");
-		actionBar.setSubtitle(getResources().getString(R.string.app_name));
-		actionBar.hide();
 		setContentView(R.layout.search_car_activity);
 
 		btSearch = (ImageView) findViewById(R.id.btSearch);
 		btSearch.setOnClickListener(searchListener);
 
 		// set auto Text for TextField
-		loadPlaceDistrict();
-		tvFromPlace = (AutoCompleteTextView) findViewById(R.id.atTvFromPlace);
-		tvFromDistrict = (AutoCompleteTextView) findViewById(R.id.atTvFromDistrict);
-		tvToPlace = (AutoCompleteTextView) findViewById(R.id.atTvToPlace);
-		tvToDistrict = (AutoCompleteTextView) findViewById(R.id.atTvToDistrict);
-
-		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line, PLACE);
-		tvFromPlace.setAdapter(adapterPLACE);
-		tvToPlace.setAdapter(adapterPLACE);
-
-		tvFromPlace.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				String place = tvFromPlace.getText().toString();
-				for (Place p : place_district) {
-					if (p.getPlace().equals(place)) {
-						List<District> list = p.getDistrictList();
-						DISTRICT.clear();
-						for (int i = 0; i < list.size(); i++) {
-							DISTRICT.add(list.get(i).getName());
-						}
-						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
-								SearchActivity.this,
-								android.R.layout.simple_dropdown_item_1line,
-								DISTRICT);
-						tvFromDistrict.setAdapter(adapterDISTRICT);
-						break;
-					}
-				}
-			}
-		});
-
-		tvToPlace.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				String place = tvToPlace.getText().toString();
-				for (Place p : place_district) {
-					if (p.getPlace().equals(place)) {
-						List<District> list = p.getDistrictList();
-						DISTRICT.clear();
-						for (int i = 0; i < list.size(); i++) {
-							DISTRICT.add(list.get(i).getName());
-						}
-						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
-								SearchActivity.this,
-								android.R.layout.simple_dropdown_item_1line,
-								DISTRICT);
-						tvToDistrict.setAdapter(adapterDISTRICT);
-						break;
-					}
-				}
-			}
-		});
-	}
-
-	private void loadPlaceDistrict() {
-		try {
-			InputStream inputStream = getAssets().open("PLACE-DISTRICT.txt");
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					inputStream, "UTF-8"));
-			String str;
-			while ((str = in.readLine()) != null) {
-				Place _place = new Place(str);
-				place_district.add(_place);
-				PLACE.add(_place.getPlace());
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+//		LoadPlace loadPlace = new LoadPlace(this);
+//		loadPlace.loadPlaceDistrict();
+//		PLACE = loadPlace.getPLACE();
+//		place_district = loadPlace.getPlace_district();
+//		tvFromPlace = (AutoCompleteTextView) findViewById(R.id.atTvFromPlace);
+//		tvFromDistrict = (AutoCompleteTextView) findViewById(R.id.atTvFromDistrict);
+//		tvToPlace = (AutoCompleteTextView) findViewById(R.id.atTvToPlace);
+//		tvToDistrict = (AutoCompleteTextView) findViewById(R.id.atTvToDistrict);
+//
+//		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_dropdown_item_1line, PLACE);
+//		tvFromPlace.setAdapter(adapterPLACE);
+//		tvToPlace.setAdapter(adapterPLACE);
+//
+//		tvFromPlace.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before,
+//					int count) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count,
+//					int after) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//				// TODO Auto-generated method stub
+//				String place = tvFromPlace.getText().toString();
+//				for (Place p : place_district) {
+//					if (p.getPlace().equals(place)) {
+//						List<District> list = p.getDistrictList();
+//						DISTRICT.clear();
+//						for (int i = 0; i < list.size(); i++) {
+//							DISTRICT.add(list.get(i).getName());
+//						}
+//						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
+//								SearchTab.this,
+//								android.R.layout.simple_dropdown_item_1line,
+//								DISTRICT);
+//						tvFromDistrict.setAdapter(adapterDISTRICT);
+//						break;
+//					}
+//				}
+//			}
+//		});
+//
+//		tvToPlace.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before,
+//					int count) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count,
+//					int after) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//				// TODO Auto-generated method stub
+//				String place = tvToPlace.getText().toString();
+//				for (Place p : place_district) {
+//					if (p.getPlace().equals(place)) {
+//						List<District> list = p.getDistrictList();
+//						DISTRICT.clear();
+//						for (int i = 0; i < list.size(); i++) {
+//							DISTRICT.add(list.get(i).getName());
+//						}
+//						ArrayAdapter<String> adapterDISTRICT = new ArrayAdapter<String>(
+//								SearchTab.this,
+//								android.R.layout.simple_dropdown_item_1line,
+//								DISTRICT);
+//						tvToDistrict.setAdapter(adapterDISTRICT);
+//						break;
+//					}
+//				}
+//			}
+//		});
 	}
 
 	private OnClickListener searchListener = new OnClickListener() {
@@ -235,7 +211,7 @@ public class SearchActivity extends Activity {
 				}
 			}
 
-			Intent intent = new Intent(SearchActivity.this,
+			Intent intent = new Intent(SearchTab.this,
 					ResultSearchActivity.class);
 			intent.putParcelableArrayListExtra("listResultTrips", list);
 			startActivity(intent);
