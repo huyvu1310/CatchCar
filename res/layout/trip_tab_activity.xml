@@ -23,7 +23,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/btAddTown"
+            android:id="@+id/btAddNewTrip"
             android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_gravity="center"

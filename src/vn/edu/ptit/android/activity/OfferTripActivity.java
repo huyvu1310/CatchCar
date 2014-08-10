@@ -112,6 +112,7 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.offer_trip_activity);
+		
 		actvCity = (AutoCompleteTextView) findViewById(R.id.actvCity);
 		actvDistrict = (AutoCompleteTextView) findViewById(R.id.actvDistrict);
 		etNumOfSeat = (EditText) findViewById(R.id.etNumOfSeat);
@@ -138,8 +139,9 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		routeAdapter = new RouteAdaper(getApplicationContext(),
 				R.layout.offer_trip_listview, new ArrayList<String>());
 		lvRoutes.setAdapter(routeAdapter);
+		
 		// init autotextview
-		loadPlaceDistrict();
+		//loadPlaceDistrict();
 		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, PLACE);
 		actvCity.setAdapter(adapterPLACE);
