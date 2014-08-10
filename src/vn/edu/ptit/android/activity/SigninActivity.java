@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class SigninActivity extends Activity {
 
-	private static String url = "http://192.168.38.1:8080/CatchCar/CheckUserServlet";
+	private static String url = "http://192.168.130.1:8080/CatchCar/CheckUserServlet";
 
 	EditText etUsername, etPassword, etConfirm, etPhone, etFullname, etEmail;
 	ImageButton bt_OK;
