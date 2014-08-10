@@ -11,7 +11,7 @@ public class Key {
 	public static final String YES_LOGIN = "yes_login";
 	public static final String NO_LOGIN = "no_login";
 
-	public static void Write_SharedPreferences(String key, String value,
+	public void Write_SharedPreferences(String key, String value,
 			Context context) {
 		SharedPreferences preference = context.getSharedPreferences("Setup",
 				Context.MODE_PRIVATE);
@@ -20,8 +20,7 @@ public class Key {
 		editor.commit();
 	}
 
-	public static String Read_SharedPreferences(String key, String value,
-			Context context) {
+	public String Read_SharedPreferences(String key, Context context) {
 		SharedPreferences preference = context.getSharedPreferences("Setup",
 				Context.MODE_PRIVATE);
 		return preference.getString(key, "");

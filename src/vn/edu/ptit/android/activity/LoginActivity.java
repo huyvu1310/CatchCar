@@ -14,6 +14,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import vn.edu.ptit.android.utils.Key;
 import vn.ptit.edu.vn.R;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -55,7 +56,8 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(LoginActivity.this, SigninActivity.class);
+				Intent intent = new Intent(LoginActivity.this,
+						SigninActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -115,8 +117,13 @@ public class LoginActivity extends Activity {
 			// TODO Auto-generated method stub
 			System.out.println(result);
 			if (result.equals("YES")) {
-				// ok
-
+				Key key = new Key();
+				key.Write_SharedPreferences(Key.USERNAME, etUsername.getText()
+						.toString(), LoginActivity.this);
+				key.Write_SharedPreferences(Key.PASSWORD, etPassword.getText()
+						.toString(), LoginActivity.this);
+				key.Write_SharedPreferences(Key.CHECK_LOGIN, Key.YES_LOGIN,
+						LoginActivity.this);
 			} else {
 				// fail
 			}

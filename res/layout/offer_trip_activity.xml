@@ -117,13 +117,13 @@
                 android:layout_weight="1"
                 android:text="Loại xe" />
 
-            <EditText
-                android:id="@+id/etCarType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Spinner
+                android:id="@+id/spCarType"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
                 android:layout_weight="6"
                 android:hint="" >
-            </EditText>
+            </Spinner>
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"

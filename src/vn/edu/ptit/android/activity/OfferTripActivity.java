@@ -56,6 +56,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -73,6 +74,10 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 	private EditText etCarType;
 	private Button btPublish, btCancel;
 	private ImageButton btDate, btTime, btAddTown, btGmap;
+
+	Spinner spCarType;
+	private List<String> listspCarType = new LinkedList<String>();
+
 	static final int DATE_DIALOG_ID = 0;
 	static final int TIME_DIALOG_ID = 1;
 	private int year, month, day, hour, minute;
@@ -112,13 +117,13 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.offer_trip_activity);
-		
+
 		actvCity = (AutoCompleteTextView) findViewById(R.id.actvCity);
 		actvDistrict = (AutoCompleteTextView) findViewById(R.id.actvDistrict);
 		etNumOfSeat = (EditText) findViewById(R.id.etNumOfSeat);
 		etDate = (EditText) findViewById(R.id.etDate);
 		etTime = (EditText) findViewById(R.id.etTime);
-		etCarType = (EditText) findViewById(R.id.etCarType);
+		// etCarType = (EditText) findViewById(R.id.etCarType);
 		btPublish = (Button) findViewById(R.id.btPublish);
 		btPublish.setOnClickListener(this);
 		btCancel = (Button) findViewById(R.id.btCancel);
@@ -139,15 +144,22 @@ public class OfferTripActivity extends Activity implements OnClickListener {
 		routeAdapter = new RouteAdaper(getApplicationContext(),
 				R.layout.offer_trip_listview, new ArrayList<String>());
 		lvRoutes.setAdapter(routeAdapter);
-		
+
+		// init SpCarType
+		spCarType = (Spinner) findViewById(R.id.spCarType);
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		ArrayAdapter adapterSpCarType = new ArrayAdapter(this,
+				android.R.layout.simple_spinner_item, listspCarType);
+		spCarType.setAdapter(adapterSpCarType);
+
 		// init autotextview
-		//loadPlaceDistrict();
+		// loadPlaceDistrict();
 		ArrayAdapter<String> adapterPLACE = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line, PLACE);
 		actvCity.setAdapter(adapterPLACE);
-		//actvCity.setAdapter(new PlacesAutoCompleteAdapter(
-		//		getApplicationContext(),
-		//		android.R.layout.simple_dropdown_item_1line));
+		// actvCity.setAdapter(new PlacesAutoCompleteAdapter(
+		// getApplicationContext(),
+		// android.R.layout.simple_dropdown_item_1line));
 		actvCity.addTextChangedListener(new TextWatcher() {
 
 			@Override
