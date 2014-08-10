@@ -15,10 +15,15 @@
     <string name="repassword">Confirm</string>
     <string name="gmap">Gmap</string>
     <string name="tim_kiem_chuyen_xe">Tìm kiếm chuyến xe</string>
-    <string name = "dang_tin">Đăng tin</string>
+    <string name="dang_tin">Đăng tin</string>
     <string name="chat">Chat</string>
     <string name="quan_ly_tai_khoan">Quản lý Tài khoản</string>
-    <string name ="login">Đăng nhập</string>
+    <string name="login">Đăng nhập</string>
     <string name="huong_dang">Hướng dẫn</string>
+    <string name="chuyen_di">Chuyến đi</string>
+    <string name="di_nho">Đi nhờ</string>
+    <string name="tim_kiem">Tìm kiếm</string>
+    <string name="ca_nhan">Cá nhân</string>
+    <string name="thong_tin_xe">Thông tin xe</string>
 
 </resources>

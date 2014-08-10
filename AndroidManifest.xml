@@ -30,8 +30,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <activity android:name="vn.edu.ptit.android.tab.HitchhikeTab" />
+        <activity android:name="vn.edu.ptit.android.tab.PersonalTab" />
+        <activity android:name="vn.edu.ptit.android.tab.SearchTab" />
+        <activity android:name="vn.edu.ptit.android.tab.TripTab" />
         <activity
-            android:name="vn.edu.ptit.android.activity.MainApp"
+            android:name="vn.edu.ptit.android.tab.MainTab"
+            android:theme="@style/CustomTheme"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

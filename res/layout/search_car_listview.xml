@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Ngày khởi hành" />
+            android:text="Giờ xuất phát" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Giờ đi" />
+            android:text="Giờ đến dự kiến" />
 
         <TextView
             android:id="@+id/tvTime"

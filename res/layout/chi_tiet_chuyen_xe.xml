@@ -4,122 +4,226 @@
     android:layout_height="match_parent"
     android:layout_gravity="center" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="top"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Mô tả  lộ trình" />
-
-        <TextView
-            android:id="@+id/tvMoTa"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:ems="10" />
-
-        <ImageView
-            android:id="@+id/imageViewGmap"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="right"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
+        android:layout_height="fill_parent" >
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10" >
+            android:layout_height="fill_parent"
+            android:gravity="top"
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:text="Số ghế còn" />
+                android:gravity="left"
+                android:text="Mô tả  lộ trình" />
 
             <TextView
-                android:id="@+id/tvSoGheCon"
+                android:id="@+id/tvMoTa"
+                android:layout_width="match_parent"
+                android:layout_height="122dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/style_rectangle_no_color"
+                android:ems="10" />
+
+            <ImageView
+                android:id="@+id/imageViewGmap"
                 android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:ems="10"
-                android:hint="" >
-            </TextView>
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Thời gian xuất phát" />
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Thời gian đến dự kiến" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Thông tin xe" />
+
+                <TextView
+                    android:id="@+id/tvSoGheCon"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Biển số" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Loại xe" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="số ghế trống" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="10" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="Mô tả xe" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:ems="10"
+                    android:hint="" >
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvMoTaXe"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/style_rectangle_no_color"
+                android:ems="10" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="14" >
+
+                <Button
+                    android:id="@+id/btLienLac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Liên lạc" />
+
+                <Button
+                    android:id="@+id/btGuiYeuCau"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Gửi yêu cầu" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10" >
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="Ngày khởi hành" />
-
-            <TextView
-                android:id="@+id/tvNgay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:ems="10"
-                android:hint="" >
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10" >
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="Giờ xuất phát" />
-
-            <TextView
-                android:id="@+id/tvGio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:ems="10"
-                android:hint="" >
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="14" >
-
-            <Button
-                android:id="@+id/btLienLac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Liên lạc" />
-
-            <Button
-                android:id="@+id/btGuiYeuCau"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Gửi yêu cầu" />
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -43,9 +43,7 @@ public class SigninActivity extends Activity {
 		etUsername = (EditText) findViewById(R.id.etUsername);
 		etPassword = (EditText) findViewById(R.id.etPassword);
 		etConfirm = (EditText) findViewById(R.id.etConfirm);
-		etFullname = (EditText) findViewById(R.id.etFullname);
 		etPhone = (EditText) findViewById(R.id.etPhone);
-		etEmail = (EditText) findViewById(R.id.etEmail);
 
 		bt_OK = (ImageButton) findViewById(R.id.bt_OK_Signin);
 		bt_OK.setOnClickListener(new View.OnClickListener() {
