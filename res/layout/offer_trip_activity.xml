@@ -89,21 +89,24 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="150dp"
-            android:background="@drawable/style_rectangle_no_color">
+            android:background="@drawable/style_rectangle_no_color" >
 
             <ListView
+                android:id="@+id/lvRoutes"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lvRoutes" >
+                android:layout_marginRight="5dp" >
             </ListView>
         </LinearLayout>
-        
-        <ImageButton  android:id="@+id/btGmap"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                android:layout_gravity="right"
-                android:src="@drawable/gmap" />/>
+
+        <ImageButton
+            android:id="@+id/btGmap"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:src="@drawable/gmap" />
+/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -121,9 +124,8 @@
                 android:id="@+id/spCarType"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:layout_weight="6"
-                android:hint="" >
-            </Spinner>
+                android:layout_weight="6" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -136,10 +138,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:hint="" >
+                android:hint=""
+                android:inputType="number" >
             </EditText>
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -216,6 +218,7 @@
                 android:text="Ngày đến" />
 
             <EditText
+                android:id="@+id/etNgayden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
@@ -224,6 +227,7 @@
             </EditText>
 
             <ImageButton
+                android:id="@+id/btNgayden"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -244,6 +248,7 @@
                 android:text="Giờ đến" />
 
             <EditText
+                android:id="@+id/etGioden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
@@ -252,6 +257,7 @@
             </EditText>
 
             <ImageButton
+                android:id="@+id/btGioden"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

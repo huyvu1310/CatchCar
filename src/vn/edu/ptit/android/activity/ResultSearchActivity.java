@@ -34,7 +34,7 @@ public class ResultSearchActivity extends Activity {
 
 		//listview show result
 		lvResult = (ListView) findViewById(R.id.lv_result_trips);
-		arrTrips = getIntent().getParcelableArrayListExtra("listResultTrips");
+		//arrTrips = getIntent().getParcelableArrayListExtra("listResultTrips");
 		tripsAdapter = new TripsAdapter(ResultSearchActivity.this,
 				R.layout.search_car_listview, arrTrips);
 		lvResult.setAdapter(tripsAdapter);
@@ -47,7 +47,7 @@ public class ResultSearchActivity extends Activity {
 				// TODO Auto-generated method stub
 				//thay doi MainApp.class cho phu hop
 				Intent intent = new Intent(ResultSearchActivity.this, ChiTietActivity.class);
-				intent.putParcelableArrayListExtra("listResultTrips", arrTrips);
+				//intent.putParcelableArrayListExtra("listResultTrips", arrTrips);
 				intent.putExtra("position", position);
 				startActivity(intent);
 			}

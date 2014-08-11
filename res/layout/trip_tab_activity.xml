@@ -34,7 +34,10 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lvTrip"
+        android:id="@+id/lvTripDetail"
+        android:background="@drawable/style_rectangle_no_color"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>

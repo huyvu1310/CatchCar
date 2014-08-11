@@ -35,9 +35,9 @@ public class TripsAdapter extends ArrayAdapter<Trips> {
 		TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 
 		Trips trips = arrContact.get(position);
-		tvAuthor.setText(String.valueOf(trips.getTaiXeid()));
-		tvDate.setText(trips.getThoiGian());
-		tvTime.setText(trips.getThoiGian());
+		//tvAuthor.setText(String.valueOf(trips.getTaiXeid()));
+		//tvDate.setText(trips.getThoiGian());
+		//tvTime.setText(trips.getThoiGian());
 
 		return convertView;
 	}

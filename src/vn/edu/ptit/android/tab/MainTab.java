@@ -15,6 +15,7 @@ import android.widget.TabHost.TabSpec;
 
 @SuppressWarnings("deprecation")
 public class MainTab extends TabActivity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -66,8 +67,6 @@ public class MainTab extends TabActivity {
 
 				String valueLogin = new Key().Read_SharedPreferences(
 						Key.CHECK_LOGIN, MainTab.this);
-
-				Log.d("affdfdsaf", tabId);
 
 				if (tabId.equals("ChuyenDi")) {
 					if (!valueLogin.equals(Key.YES_LOGIN)) {

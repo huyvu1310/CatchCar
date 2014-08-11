@@ -34,10 +34,12 @@
         <activity android:name="vn.edu.ptit.android.tab.PersonalTab" />
         <activity android:name="vn.edu.ptit.android.tab.SearchTab" />
         <activity android:name="vn.edu.ptit.android.tab.TripTab" />
+        <activity android:name="vn.edu.ptit.android.activity.SigninActivity" />
+        <activity android:name="vn.edu.ptit.android.activity.RideDetail" />
         <activity
             android:name="vn.edu.ptit.android.tab.MainTab"
-            android:theme="@style/CustomTheme"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/CustomTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -86,6 +88,15 @@
             android:label="@string/login"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" >
+            <intent-filter>
+                <action android:name="android.intent.action.LOGINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vn.edu.ptit.android.activity.AddNewCar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.LOGINACTIVITY" />
 

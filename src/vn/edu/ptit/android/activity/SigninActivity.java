@@ -16,6 +16,10 @@ import org.json.JSONObject;
 
 import vn.ptit.edu.vn.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +43,7 @@ public class SigninActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.sigin_activity);
 
 		etUsername = (EditText) findViewById(R.id.etUsername);
 		etPassword = (EditText) findViewById(R.id.etPassword);
@@ -63,6 +68,7 @@ public class SigninActivity extends Activity {
 
 				SignInMethod signInMethod = new SignInMethod();
 				signInMethod.execute(new String[] { url });
+
 			}
 		});
 
@@ -87,13 +93,12 @@ public class SigninActivity extends Activity {
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
 				JSONObject jObject = new JSONObject();
+				jObject.put("id", null);
 				jObject.put("username", etUsername.getText().toString());
 				jObject.put("password", etPassword.getText().toString());
-				jObject.put("fullname", etFullname.getText().toString());
 				jObject.put("phone", etPhone.getText().toString());
-				jObject.put("email", etEmail.getText().toString());
 				String sendObj = jObject.toString();
-				list.add(new BasicNameValuePair("checkuser", sendObj));
+				list.add(new BasicNameValuePair("registry", sendObj));
 				UrlEncodedFormEntity e = new UrlEncodedFormEntity(list,
 						HTTP.UTF_8);
 				HttpPost httpPost = new HttpPost(param);
@@ -110,12 +115,28 @@ public class SigninActivity extends Activity {
 			return out;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			System.out.println(result);
+			System.out.println(result.equals("YES"));
 			if (result.equals("YES")) {
-				// ok
+				System.out.println(result);
+				AlertDialog alertDialog = new AlertDialog.Builder(
+						SigninActivity.this).create();
+				alertDialog.setTitle("Đăng kí"); // set title
+				alertDialog.setMessage("Đăng kí thành công..!"); // set Message
+				alertDialog.setIcon(R.drawable.ic_checkin); // set icon/image
+				alertDialog.setButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								SigninActivity.this.finish();
+							}
+						});
+				// Showing Alert Message
+				alertDialog.show();
 
 			} else {
 				// fail
@@ -128,5 +149,28 @@ public class SigninActivity extends Activity {
 			super.onProgressUpdate(values);
 		}
 
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case 0:
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("This ends the activity");
+			builder.setCancelable(true);
+			builder.setNegativeButton("I agree",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Toast.makeText(getBaseContext(), "OK clicked!",
+									Toast.LENGTH_SHORT).show();
+
+						}
+					});
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+		return super.onCreateDialog(id);
 	}
 }

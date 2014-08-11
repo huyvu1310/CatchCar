@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 public class Key {
+	public static final String ID = "id";
 	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
+	public static final String PHONE = "phone";
 	public static final String CHECK_LOGIN = "check_login";
 	public static final String YES_LOGIN = "yes_login";
 	public static final String NO_LOGIN = "no_login";
@@ -23,6 +25,6 @@ public class Key {
 	public String Read_SharedPreferences(String key, Context context) {
 		SharedPreferences preference = context.getSharedPreferences("Setup",
 				Context.MODE_PRIVATE);
-		return preference.getString(key, "");
+		return preference.getString(key, "empty");
 	}
 }

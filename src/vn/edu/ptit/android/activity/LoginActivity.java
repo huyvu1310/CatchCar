@@ -12,15 +12,20 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import vn.edu.ptit.android.tab.MainTab;
 import vn.edu.ptit.android.utils.Key;
 import vn.ptit.edu.vn.R;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -48,7 +53,7 @@ public class LoginActivity extends Activity {
 		etUsername = (EditText) findViewById(R.id.etUsername);
 		etPassword = (EditText) findViewById(R.id.etPassword);
 
-		btSignin = (ImageView) findViewById(R.id.btSignin);
+		btSignin = (ImageView) findViewById(R.id.btSigin);
 		btLogin = (ImageView) findViewById(R.id.btLogin);
 
 		btSignin.setOnClickListener(new View.OnClickListener() {
@@ -112,20 +117,47 @@ public class LoginActivity extends Activity {
 			return out;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		protected void onPostExecute(String result) {
 			// TODO Auto-generated method stub
 			System.out.println(result);
-			if (result.equals("YES")) {
-				Key key = new Key();
-				key.Write_SharedPreferences(Key.USERNAME, etUsername.getText()
-						.toString(), LoginActivity.this);
-				key.Write_SharedPreferences(Key.PASSWORD, etPassword.getText()
-						.toString(), LoginActivity.this);
-				key.Write_SharedPreferences(Key.CHECK_LOGIN, Key.YES_LOGIN,
-						LoginActivity.this);
+			if (result.equals("NO")) {
+				AlertDialog alertDialog = new AlertDialog.Builder(
+						LoginActivity.this).create();
+				alertDialog.setTitle("Đăng nhập"); // set title
+				alertDialog.setMessage("Đăng nhập không thành công..!"); // set
+																			// Message
+				alertDialog.setIcon(R.drawable.ic_error); // set icon/image
+				alertDialog.setButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								etPassword.setText("");
+							}
+						});
+				// Showing Alert Message
+				alertDialog.show();
+
 			} else {
-				// fail
+				try {
+					JSONObject obj = new JSONObject(result);
+					System.out.println(result);
+					int id = obj.getInt("id");
+					Key key = new Key();
+					key.Write_SharedPreferences(Key.ID, Integer.toString(id),
+							LoginActivity.this);
+
+					key.Write_SharedPreferences(Key.CHECK_LOGIN, Key.YES_LOGIN,
+							LoginActivity.this);
+					Intent intent = new Intent(LoginActivity.this,
+							MainTab.class);
+					startActivity(intent);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		}
 
